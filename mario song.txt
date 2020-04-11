@@ -1,0 +1,75 @@
+int melody[] = {
+NOTE_F7, NOTE_C7, NOTE_A6, NOTE_D7, NOTE_E7, NOTE_D7, NOTE_CS7, NOTE_DS7, NOTE_CS7, NOTE_C7, NOTE_AS7, NOTE_C7
+};
+
+// note durations: 4 = quarter note, 8 = eighth note, etc.:
+int noteDurations[] = {
+  4,4, 4, 6, 6, 6, 6, 6,6,6,8,2
+};
+
+
+
+
+
+
+
+
+//time definition
+#define changetime 5000
+
+#include "game.h"
+
+int onLed; // numero de leds acesas
+int position = 0,lastPosition;
+int value,lastValue;
+bool player;//0 e o que salva as instrucoes e 1 quem tenta adivinhar
+
+lamp led[numLed];//valuees que serao alterados com frequencia
+lamp ledSaved[numLed];//value do led guardado
+
+void setup() {
+  Serial.begin(9600);
+  begin(led);
+  start(led,&player);
+
+
+}
+
+void loop() {
+
+  value = detectorValue();//le o valor do sensor
+  
+      
+      if(value<ok)
+      position=turn(value, position);
+      
+      //Serial.print("deu a ");Serial.println(position);
+      led[position].blink();
+
+      if(value==ok){
+        
+        select(position,led);
+      }
+
+      if(value==save){//se o botao para salvar for apertado
+        if(player==player1){//se for o jogador 1
+          saveGame(led,ledSaved,&onLed,&player);//salva o jogo para o jogador 2 tentar
+        }else{//caso nao
+          if(checkEnd(led,ledSaved,onLed)){//se estiver certo
+            Serial.println("******Parabens!******");
+            while(detectorValue()!=save){}
+            resetLamps(ledSaved);
+            start(led,&player);
+            Serial.println(player);
+            
+          }
+        }
+            
+      }
+      //if(value!=lastValue){//le o valor do sensor
+        if (value!=0)
+          showGame(led,position);
+        //Serial.print(lastValue);Serial.print(" and ");Serial.println(value);
+       // lastValue=value;        
+     // }
+}
