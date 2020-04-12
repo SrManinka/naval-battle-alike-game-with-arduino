@@ -1,16 +1,14 @@
 #ifndef lamp_h
 
-#include <Arduino.h>
-
 #define lamp_h
-#define HIGH 1
-#define LOW 0
+
 
 
 class lamp {
+  private:
+    int door;// fisical door
+    bool state = false; //on and off
   public:
-    int door;//door que estara conectado
-    bool state = false; //aceso e apagado
 
     void setDoor(int n) {
       door = n;
@@ -39,27 +37,30 @@ class lamp {
       digitalWrite(door, LOW);
     }
 
-    void mudaState() { //altera entre 1 e 0
+    void changeState() { //alternate between on and off
       state = !state;
       digitalWrite(door, state);
     }
 
     void blink() {
       int intensity;
-      if(state)
-        intensity =150;
-      else
-        intensity = 30;
-      analogWrite(door, intensity);
-      delay (150);
-      analogWrite(door, LOW);
-      delay(150);
-    }
-    void glowLess(){
+      if (state)
+        intensity = 900;
+      else {
+        intensity = 150;
+      }
+      for (int j = 0; j < 100; j++) {
+        digitalWrite(door, HIGH);
+        delayMicroseconds(intensity); // Approximately 10% duty cycle @ 1KHz
+        digitalWrite(door, LOW);
+        delayMicroseconds(1000 - intensity);
+        delay(1);
+      }
 
-      analogWrite(door, 10);
+      digitalWrite(door, LOW);
       delay(100);
     }
+
 
 };
 #endif

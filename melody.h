@@ -1,3 +1,5 @@
+#include "pitches.h"
+
 //respective Number of Notes
 #define marioNotes 12
 #define coinNotes 2

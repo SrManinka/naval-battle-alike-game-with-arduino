@@ -1,6 +1,6 @@
 #include "sensor.h"
 
-IRrecv reciver(A4);
+IRrecv reciver(sensordoor);
 
     sensor::sensor(int d , int t){ // constructor
       door = d;
@@ -20,8 +20,8 @@ IRrecv reciver(A4);
     sensor::getType() {
       return type;
     }
-    sensor::getValor() {
-      return value;
+    sensor::getDoor() {
+      return door;
     }
 
     sensor::read() {
@@ -34,13 +34,7 @@ IRrecv reciver(A4);
         }
       } else
         value = analogRead(door);
-
       switch (type)  {
-
-        case potentiometer:
-          value = map(value, 0, 1023, 0, numLed - 1);
-          break;
-
 
         case joystick:  //Joystick
           if (value <= 300) //left

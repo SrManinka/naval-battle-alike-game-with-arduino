@@ -1,7 +1,7 @@
 #ifndef button_h
 #define button_h
 
-#define savetime 2000
+#define savetime 1000
 
 class button {
   private:
@@ -36,7 +36,7 @@ class button {
       while (digitalRead(door) == LOW) {
         t++;
         delay(1);
-        if (t > 3000) {
+        if (t > savetime) {
           t = 0;
           return 2;
         }
