@@ -46,20 +46,20 @@ IRrecv reciver(sensordoor);
 
         case controller:
           switch (value) {//values from ir controller
-            case 1972149634:
-            case 3772819033:
+            case irleft1:
+            case irleft2:
               return left;
 
-            case 3772794553:
-            case 1400905448:
+            case irright1:
+            case irright2:
               return right;
 
-            case 2331063592:
-            case 3772782313:
+            case irok1:
+            case irok2:
               return ok;
 
-            case 4105841032:
-            case 2024805451:
+            case irsave1:
+            case irsave2:
               return save;
 
             default:

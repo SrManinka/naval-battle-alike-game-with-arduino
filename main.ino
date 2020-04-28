@@ -1,7 +1,6 @@
 #include "lamp.h"
 #include "sensor.h"
 #include "button.h"
-#include "game.h"
 #include "buzzer.h"
 #include "melody.h" //melody defaults
 
@@ -102,7 +101,7 @@ int numOnLed(lamp l[numLed]) { //verify the number of led that is on
   int i, cont;
   cont = 0;
   for (i = 0; i < numLed; i++) {
-    if (l[i].state == true) {
+    if (l[i].getState() == true) {
       ++cont;
     }
   }
@@ -136,7 +135,7 @@ int compairPos(lamp l[numLed], lamp l2[numLed]) { //verify how many lamps are in
   int i;
   int cont = 0;
   for (i = 0; i < numLed; i++) {
-    if ((l[i].state == l2[i].state) and (l[i].state == true)) {
+    if ((l[i].getState() == l2[i].getState()) and (l[i].getState() == true)) {
       ++cont;
     }
   }
@@ -146,7 +145,7 @@ int compairPos(lamp l[numLed], lamp l2[numLed]) { //verify how many lamps are in
 bool compairRes(lamp l[numLed], lamp l2[numLed]) { // verify if game is over
   int i;
   for (i = 0; i < numLed; i++) {
-    if (l[i].state != l2[i].state)
+    if (l[i].getState() != l2[i].getState())
       return false;
   }
   return true;
@@ -178,7 +177,7 @@ bool checkEnd(lamp l[numLed], lamp l2[numLed], int ledOn) { //verify if game is 
 void showGame(lamp l[numLed], int pos) { //show the lamps
   int i;
   for (i = 0; i < numLed; i++) {
-    if (l[i].state == true) {
+    if (l[i].getState() == true) {
 
       l[i].on();
     } else {

@@ -12,6 +12,17 @@
 #define save 6
 #define numLed 5//number of leds
 
+//Ir controller Button definition
+
+#define irleft1 1972149634
+#define irleft2 3772819033
+#define irright1 3772819033
+#define irright2 1400905448
+#define irok1 2331063592
+#define irok2 3772782313
+#define irsave1 4105841032
+#define irsave2 2024805451
+
 //type of controller definition
 
 #define joystick 3
